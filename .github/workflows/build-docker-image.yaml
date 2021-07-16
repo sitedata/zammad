@@ -2,7 +2,7 @@ name: build-docker-image
 
 on:
   push:
-    branches: [develop]
+    branches: [test-docker-multiarch-build]
 
 jobs:
   build-docker-image:
@@ -20,5 +20,12 @@ jobs:
         uses: actions/checkout@master
       - name: Fetch all history for all tags and branches
         run: git fetch --prune --unshallow
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@master
+        with:
+          platforms: all
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
       - name: Build docker image
         run: .github/docker-image-build.sh
