@@ -15,7 +15,7 @@ echo "${DOCKER_PASSWORD}" | docker login --username="${DOCKER_USERNAME}" --passw
 # clone docker repo
 DOCKER_REPOSITORY_CLONE_URL="https://github.com/${REPO_USER}/${DOCKER_GITHUB_REPOSITORY}"
 echo "Cloning ${DOCKER_REPOSITORY_CLONE_URL}"
-git clone "${DOCKER_REPOSITORY_CLONE_URL}"
+git clone "${DOCKER_REPOSITORY_CLONE_URL}" -b mg-debug-arm64-build
 
 # enter dockerfile dir
 cd "${REPO_ROOT}/${DOCKER_GITHUB_REPOSITORY}"
