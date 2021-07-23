@@ -12,7 +12,7 @@ class AdminObjectManagerTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     # already existing
     object_manager_attribute_create(
@@ -91,9 +91,9 @@ class AdminObjectManagerTest < TestCase
         title:    'ticket attribute test #1',
         body:     'ticket attribute test #1',
       },
-      #custom_data_select: {
+      # custom_data_select: {
       #  key1: 'some value',
-      #},
+      # },
       custom_data_input:   {
         browser_test1: 'some value öäüß',
       },
@@ -103,9 +103,9 @@ class AdminObjectManagerTest < TestCase
     # update ticket
     ticket_update(
       data:              {},
-      #custom_data_select: {
+      # custom_data_select: {
       #  key1: 'some value',
-      #},
+      # },
       custom_data_input: {
         browser_test1: 'some value ABC',
       },
@@ -165,7 +165,7 @@ class AdminObjectManagerTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     object_manager_attribute_create(
       data: {
@@ -190,9 +190,9 @@ class AdminObjectManagerTest < TestCase
         name:      'browser_test2',
         display:   'Browser Test 2',
         data_type: 'Text',
-        #data_option: {
+        # data_option: {
         #  default: 'xxx',
-        #},
+        # },
       },
     )
     object_manager_attribute_create(
@@ -215,11 +215,11 @@ class AdminObjectManagerTest < TestCase
         name:      'browser_test4',
         display:   'Browser Test 4',
         data_type: 'Integer',
-        #data_option: {
+        # data_option: {
         #  default: 'xxx',
         #  min: 15,
         #  max: 99,
-        #},
+        # },
       },
     )
 
@@ -228,11 +228,11 @@ class AdminObjectManagerTest < TestCase
         name:      'browser_test5',
         display:   'Browser Test 5',
         data_type: 'Datetime',
-        #data_option: {
+        # data_option: {
         #  future: true,
         #  past: true,
         #  diff: 24
-        #},
+        # },
       },
     )
 
@@ -241,11 +241,11 @@ class AdminObjectManagerTest < TestCase
         name:      'browser_test6',
         display:   'Browser Test 6',
         data_type: 'Date',
-        #data_option: {
+        # data_option: {
         #  future: true,
         #  past: true,
         #  diff: 24
-        #},
+        # },
       },
     )
 
@@ -389,7 +389,7 @@ class AdminObjectManagerTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     # valid name
     object_manager_attribute_create(
@@ -499,7 +499,7 @@ class AdminObjectManagerTest < TestCase
       url:      browser_url,
     )
 
-    tasks_close_all()
+    tasks_close_all
 
     # create two new attributes
     object_manager_attribute_create(
@@ -595,7 +595,7 @@ class AdminObjectManagerTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     # lexicographically ordered list of option strings
     options = %w[0 000.000 1 100.100 100.200 2 200.100 200.200 3 ä b n ö p sr ß st t ü v]
@@ -684,7 +684,7 @@ class AdminObjectManagerTest < TestCase
     options_no_dog = options.except('dog')
     options_no_dog_no_delete = options_no_dog.except('delete')
 
-    tasks_close_all()
+    tasks_close_all
 
     object_manager_attribute_create(
       data: {
@@ -788,7 +788,7 @@ class AdminObjectManagerTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     object_manager_attribute_create(
       data: {
@@ -818,13 +818,13 @@ class AdminObjectManagerTest < TestCase
 
     ticket_open_by_title(title: 'select')
 
-    click( css: '.content.active .tabsSidebar-tab[data-tab="organization"]' )
-    click( css: '.content.active .sidebar[data-tab="organization"] .js-actions .dropdown-toggle' )
-    click( css: '.content.active .sidebar[data-tab="organization"] .js-actions [data-type="organization-edit"]' )
+    click(css: '.content.active .tabsSidebar-tab[data-tab="organization"]')
+    click(css: '.content.active .sidebar[data-tab="organization"] .js-actions .dropdown-toggle')
+    click(css: '.content.active .sidebar[data-tab="organization"] .js-actions [data-type="organization-edit"]')
 
     modal_ready
     select(css: '.content.active .modal select[name="bool_test"]', value: 'NO')
-    click( css: '.content.active .modal .js-submit' )
+    click(css: '.content.active .modal .js-submit')
     modal_disappear
 
     watch_for(
@@ -864,7 +864,7 @@ class AdminObjectManagerTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     object_manager_attribute_create(
       data: {
@@ -894,13 +894,13 @@ class AdminObjectManagerTest < TestCase
 
     ticket_open_by_title(title: 'select')
 
-    click( css: '.content.active .tabsSidebar-tab[data-tab="customer"]' )
-    click( css: '.content.active .sidebar[data-tab="customer"] .js-actions .dropdown-toggle' )
-    click( css: '.content.active .sidebar[data-tab="customer"] .js-actions [data-type="customer-edit"]' )
+    click(css: '.content.active .tabsSidebar-tab[data-tab="customer"]')
+    click(css: '.content.active .sidebar[data-tab="customer"] .js-actions .dropdown-toggle')
+    click(css: '.content.active .sidebar[data-tab="customer"] .js-actions [data-type="customer-edit"]')
 
     modal_ready
     select(css: '.content.active .modal select[name="bool_test"]', value: 'NO')
-    click( css: '.content.active .modal .js-submit' )
+    click(css: '.content.active .modal .js-submit')
     modal_disappear
 
     watch_for(

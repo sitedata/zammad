@@ -28,7 +28,7 @@ RSpec.describe Tag, type: :request do
         it "found  1  tag  using search term '#{search_term}'" do
           get '/api/v1/tag_search', params: { term: search_term }
           expect(response).to have_http_status(:ok)
-          expect(json_response).to contain_exactly( 'id' => foobar_tag.id, 'value' => foobar_tag.name )
+          expect(json_response).to contain_exactly('id' => foobar_tag.id, 'value' => foobar_tag.name)
         end
       end
 
@@ -36,7 +36,7 @@ RSpec.describe Tag, type: :request do
         it "found  0  tags using search term '#{search_term}'" do
           get '/api/v1/tag_search', params: { term: search_term }
           expect(response).to have_http_status(:ok)
-          expect(json_response).to contain_exactly()
+          expect(json_response).to contain_exactly
         end
       end
 

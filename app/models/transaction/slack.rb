@@ -210,7 +210,7 @@ class Transaction::Slack
 
     # only show allowed attributes
     attribute_list = ObjectManager::Object.new('Ticket').attributes(user).index_by { |item| item[:name] }
-    #puts "AL #{attribute_list.inspect}"
+    # puts "AL #{attribute_list.inspect}"
     user_related_changes = {}
     @item[:changes].each do |key, value|
 
@@ -300,7 +300,8 @@ class Transaction::Slack
           total_timeout: 20,
           log:           {
             facility: 'slack_webhook',
-          }
+          },
+          verify_ssl:    true,
         },
       )
     end

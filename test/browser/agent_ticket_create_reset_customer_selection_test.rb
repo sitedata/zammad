@@ -10,7 +10,7 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     click(css: 'a[href="#new"]', only_if_exists: true)
     click(css: 'a[href="#ticket/create"]')
@@ -30,7 +30,7 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
     click(css: '.content.active .newTicket [name="customer_id_completion"]')
 
     # check if pulldown is open, it's not working stable via selenium
-    @browser.execute_script( "$('.content.active .newTicket .js-recipientDropdown').addClass('open')" )
+    @browser.execute_script("$('.content.active .newTicket .js-recipientDropdown').addClass('open')")
 
     set(
       css:   '.content.active .newTicket input[name="customer_id_completion"]',
@@ -84,7 +84,7 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
     )
 
     # cleanup
-    tasks_close_all()
+    tasks_close_all
   end
 
   def test_clear_customer_use_email
@@ -94,7 +94,7 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
       password: 'test',
       url:      browser_url,
     )
-    tasks_close_all()
+    tasks_close_all
 
     click(css: 'a[href="#new"]', only_if_exists: true)
     click(css: 'a[href="#ticket/create"]')
@@ -110,7 +110,7 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
     click(css: '.content.active .newTicket [name="customer_id_completion"]')
 
     # check if pulldown is open, it's not working stable via selenium
-    @browser.execute_script( "$('.content.active .newTicket .js-recipientDropdown').addClass('open')" )
+    @browser.execute_script("$('.content.active .newTicket .js-recipientDropdown').addClass('open')")
 
     set(
       css:   '.content.active .newTicket input[name="customer_id_completion"]',
@@ -178,7 +178,7 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
     click(css: '.content.active .tabsSidebar .sidebar[data-tab="customer"] .js-actions')
     click(css: '.content.active .tabsSidebar .sidebar[data-tab="customer"] .js-actions li[data-type="customer-change"]')
 
-    modal_ready()
+    modal_ready
 
     exists_not(
       css: '.content.active .modal .user_autocompletion.form-group.has-error',
@@ -238,7 +238,7 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
     sleep 1
 
     click(css: '.content.active .modal .js-submit')
-    #click(css: '.content.active .tabsSidebar-tabs .tabsSidebar-tab[data-tab="customer"]')
+    # click(css: '.content.active .tabsSidebar-tabs .tabsSidebar-tab[data-tab="customer"]')
 
     watch_for(
       css:   '.content.active .tabsSidebar .sidebar[data-tab="customer"]',
@@ -246,6 +246,6 @@ class AgentTicketCreateResetCustomerSelectionTest < TestCase
     )
 
     # cleanup
-    tasks_close_all()
+    tasks_close_all
   end
 end

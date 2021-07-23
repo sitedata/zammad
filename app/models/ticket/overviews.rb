@@ -92,13 +92,8 @@ returns
     )
     return [] if overviews.blank?
 
-    # get only tickets with permissions
-    access_condition      = Ticket.access_condition(user, 'overview')
-    access_condition_read = Ticket.access_condition(user, 'read')
-
     ticket_attributes = Ticket.new.attributes
-    list = []
-    overviews.each do |overview|
+    overviews.map do |overview|
       query_condition, bind_condition, tables = Ticket.selector2sql(overview.condition, current_user: user)
       direction = overview.order[:direction]
       order_by = overview.order[:by]
@@ -129,18 +124,17 @@ returns
         end
       end
 
-      overview_access_condition = access_condition
+      scope = TicketPolicy::OverviewScope
       if overview.condition['ticket.mention_user_ids'].present?
-        overview_access_condition = access_condition_read
+        scope = TicketPolicy::ReadScope
       end
-
-      ticket_result = Ticket.distinct
-                            .where(overview_access_condition)
-                            .where(query_condition, *bind_condition)
-                            .joins(tables)
-                            .order(Arel.sql("#{order_by} #{direction}"))
-                            .limit(2000)
-                            .pluck(:id, :updated_at, Arel.sql(order_by))
+      ticket_result = scope.new(user).resolve
+                                                .distinct
+                                                .where(query_condition, *bind_condition)
+                                                .joins(tables)
+                                                .order(Arel.sql("#{order_by} #{direction}"))
+                                                .limit(2000)
+                                                .pluck(:id, :updated_at, Arel.sql(order_by))
 
       tickets = ticket_result.map do |ticket|
         {
@@ -149,8 +143,13 @@ returns
         }
       end
 
-      count = Ticket.distinct.where(overview_access_condition).where(query_condition, *bind_condition).joins(tables).count()
-      item = {
+      count = TicketPolicy::OverviewScope.new(user).resolve
+                                                              .distinct
+                                                              .where(query_condition, *bind_condition)
+                                                              .joins(tables)
+                                                              .count()
+
+      {
         overview: {
           name:       overview.name,
           id:         overview.id,
@@ -160,10 +159,7 @@ returns
         tickets:  tickets,
         count:    count,
       }
-
-      list.push item
     end
-    list
   end
 
 end

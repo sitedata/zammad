@@ -70,7 +70,7 @@ class Sessions::Store::File
 
   def set(client_id, data)
     path = "#{@path}/#{client_id}"
-    File.open("#{path}/session", 'wb' ) do |file|
+    File.open("#{path}/session", 'wb') do |file|
       file.flock(File::LOCK_EX)
       file.write data.to_json
       file.flock(File::LOCK_UN)
@@ -183,13 +183,14 @@ class Sessions::Store::File
         message = file.read
         file.flock(File::LOCK_UN)
 
-        yield message
+        yield message, entry
       end
     end
   end
 
-  def remove_from_spool(entry)
-    File.remove "#{path}/#{entry}"
+  def remove_from_spool(_message, entry)
+    path = "#{@path}/spool/"
+    FileUtils.rm "#{path}/#{entry}"
   end
 
   def clear_spool
@@ -217,8 +218,8 @@ class Sessions::Store::File
           nodes.push data
         rescue => e
           Rails.logger.error "can't parse status file #{filename}, #{e.inspect}"
-          #to_delete.push "#{path}/#{entry}"
-          #next
+          # to_delete.push "#{path}/#{entry}"
+          # next
         end
       end
     end
@@ -259,8 +260,8 @@ class Sessions::Store::File
           yield data
         rescue => e
           Rails.logger.error "can't parse session file #{filename}, #{e.inspect}"
-          #to_delete.push "#{path}/#{entry}"
-          #next
+          # to_delete.push "#{path}/#{entry}"
+          # next
         end
       end
     end
@@ -299,8 +300,8 @@ class Sessions::Store::File
           yield data
         rescue => e
           Rails.logger.error "can't parse session file #{filename}, #{e.inspect}"
-          #to_delete.push "#{path}/#{entry}"
-          #next
+          # to_delete.push "#{path}/#{entry}"
+          # next
         end
       end
     end

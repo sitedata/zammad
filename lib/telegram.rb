@@ -15,7 +15,7 @@ check token and return bot attributes of token
   def self.check_token(token)
     api = TelegramAPI.new(token)
     begin
-      bot = api.getMe()
+      bot = api.getMe
     rescue
       raise Exceptions::UnprocessableEntity, 'invalid api token'
     end
@@ -795,6 +795,7 @@ returns
       {
         open_timeout: 20,
         read_timeout: 40,
+        verify_ssl:   true,
       },
     )
   end

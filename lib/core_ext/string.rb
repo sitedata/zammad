@@ -162,7 +162,7 @@ class String
     elsif string.scan(%r{<a[[:space:]]}i).count < 5_000
       string.gsub!(%r{<a[[:space:]].*?href=("|')(.+?)("|').*?>}ix) do
         link = $2
-        counter = counter + 1
+        counter += 1
         link_list += "[#{counter}] #{link}\n"
         "[#{counter}] "
       end
@@ -441,7 +441,7 @@ class String
     # word 14
     # edv hotline wrote:
     # edv hotline schrieb:
-    #map['word-en-de'] = "[^#{marker}].{1,250}\s(wrote|schrieb):"
+    # map['word-en-de'] = "[^#{marker}].{1,250}\s(wrote|schrieb):"
 
     map.each_value do |regexp|
       string.sub!(%r{#{regexp}}) do |placeholder|

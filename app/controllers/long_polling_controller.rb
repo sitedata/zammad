@@ -64,7 +64,7 @@ class LongPollingController < ApplicationController
       4.times do
         sleep 0.25
       end
-      #sleep 1
+      # sleep 1
       Sessions.touch(client_id) # rubocop:disable Rails/SkipsModelValidations
 
       # set max loop time to 24 sec. because of 30 sec. timeout of mod_proxy
@@ -73,7 +73,7 @@ class LongPollingController < ApplicationController
         count = 12
       end
       loop do
-        count = count - 1
+        count -= 1
         queue = Sessions.queue(client_id)
         if queue && queue[0]
           logger.debug { "send #{queue.inspect} to #{client_id}" }
@@ -83,7 +83,7 @@ class LongPollingController < ApplicationController
         8.times do
           sleep 0.25
         end
-        #sleep 2
+        # sleep 2
         if count.zero?
           render json: { event: 'pong' }
           return

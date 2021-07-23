@@ -85,6 +85,7 @@ push translations to online
         json:         true,
         open_timeout: 8,
         read_timeout: 24,
+        verify_ssl:   true,
       }
     )
     raise "Can't push translations to #{url}: #{result.error}" if !result.success?
@@ -175,7 +176,7 @@ get list of translations
 
         presorted_list.push item
         list.delete item
-        #list.unshift presort
+        # list.unshift presort
       end
     end
     data['list'] = presorted_list.concat list
@@ -355,6 +356,7 @@ all:
           json:         true,
           open_timeout: 8,
           read_timeout: 24,
+          verify_ssl:   true,
         }
       )
       raise "Can't load translations from #{url}: #{result.error}" if !result.success?
